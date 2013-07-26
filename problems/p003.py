@@ -6,9 +6,12 @@ Created on Jul 25, 2013
 
 from support import factorizer
 
-if __name__ == '__main__':
+def main():
 
     f = factorizer.Factorizer()
     f.set(600851475143)
 
     print max(f.get_prime_factors())
+
+if __name__ == '__main__':
+    main()

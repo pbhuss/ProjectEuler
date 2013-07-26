@@ -4,7 +4,7 @@ Created on Jul 25, 2013
 @author: peter
 '''
 
-if __name__ == '__main__':
+def main():
 
     prev = 1
     cur = 2
@@ -19,3 +19,6 @@ if __name__ == '__main__':
         prev = temp
 
     print total
+
+if __name__ == '__main__':
+    main()
