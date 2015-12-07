@@ -11,7 +11,7 @@ def main():
     f = factorizer.Factorizer()
     f.set(600851475143)
 
-    print max(f.get_prime_factors())
+    print max(f.prime_factors)
 
 if __name__ == '__main__':
     main()
