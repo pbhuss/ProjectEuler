@@ -1,10 +1,5 @@
-'''
-Created on Jul 25, 2013
-
-@author: peter
-'''
-
 from support import palindromes
+
 
 def main():
     best = -1
@@ -14,7 +9,8 @@ def main():
             if prod > best and palindromes.is_integer_palindrome(prod):
                 best = prod
 
-    print best
+    return best
+
 
 if __name__ == '__main__':
-    main()
+    print main()

@@ -52,8 +52,8 @@ def main():
         [int(num) for num in grid_line.strip().split(' ')]
         for grid_line in grid_str.strip().split('\n')
     ])
-    print greatest_product(grid, 4)
+    return greatest_product(grid, 4)
 
 
 if __name__ == '__main__':
-    main()
+    print main()

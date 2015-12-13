@@ -1,7 +1,4 @@
-from operator import mul, add
-import numpy as np
-
-from support.factorizer import Factorizer
+from operator import add
 
 
 def triangle_numbers():
@@ -121,8 +118,8 @@ def main():
         int(line.strip())
         for line in num_str.strip().split('\n')]
     huge_sum = reduce(add, numbers)
-    print str(huge_sum)[:10]
+    return int(str(huge_sum)[:10])
 
 
 if __name__ == '__main__':
-    main()
+    print main()
