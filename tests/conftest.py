@@ -22,7 +22,7 @@ def pytest_addoption(parser):
         nargs='*',
         type='int',
         choices=solution_modules.keys(),
-        default =solution_modules.keys(),
+        default=solution_modules.keys(),
         help='solution numbers to test (default: all)')
 
 
