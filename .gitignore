@@ -33,3 +33,12 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# PyCharm
+.idea
+
+# pytest
+*.cache
+
+# don't check in answers file
+data/answers.yaml

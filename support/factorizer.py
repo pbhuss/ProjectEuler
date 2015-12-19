@@ -1,9 +1,3 @@
-'''
-Created on Jul 25, 2013
-
-@author: peter
-'''
-
 from math import ceil
 
 
@@ -18,7 +12,7 @@ class Factorizer(object):
         self._factorize()
 
     def _factorize(self):
-        sqrt = ceil(self.number ** 0.5)
+        sqrt = int(ceil(self.number ** 0.5))
         if sqrt > self.primes[-1]:
             self.primes = generate_primes(continue_to=sqrt, prev=self.primes)
         self._factors = {}
@@ -90,6 +84,7 @@ def generate_primes(num=0, continue_to=0, prev=None):
         cur_num += 1
 
     return primes
+
 
 def least_common_demon(*integers):
     pfs = []
