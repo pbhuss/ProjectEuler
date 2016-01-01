@@ -4,7 +4,7 @@ from math import ceil
 class Factorizer(object):
 
     def __init__(self):
-        self.primes = generate_primes(continue_to=10000)
+        self._prime_gen = PrimeGenerator()
         self.number = None
 
     def set(self, number):
@@ -13,21 +13,19 @@ class Factorizer(object):
 
     def _factorize(self):
         sqrt = int(ceil(self.number ** 0.5))
-        if sqrt > self.primes[-1]:
-            self.primes = generate_primes(continue_to=sqrt, prev=self.primes)
         self._factors = {}
 
         cur = self.number
         index = 0
         while cur != 1:
-            prime = self.primes[index]
+            prime = self._prime_gen[index]
             if cur % prime == 0:
                 cur /= prime
                 sqrt = cur ** 0.5
                 self._factors[prime] = self._factors.get(prime, 0) + 1
             else:
                 index += 1
-                if index >= len(self.primes) or sqrt < self.primes[index]:
+                if sqrt < self._prime_gen[index]:
                     self._factors[cur] = self._factors.get(cur, 0) + 1
                     break
 
@@ -57,33 +55,63 @@ class Factorizer(object):
         return set(self._factors.keys())
 
 
-def generate_primes(num=0, continue_to=0, prev=None):
+class PrimeGenerator():
 
-    generated = 0
+    def __init__(self, prev=None, start_at=0):
+        self.reset(start_at)
+        if prev:
+            self._cur_num = prev[-1] + 1
+            self._primes = prev
+            self._prime_set = set(prev)
+        else:
+            self._cur_num = 2
+            self._primes = []
+            self._prime_set = set()
 
-    if prev:
-        cur_num = prev[-1] + 1
-        primes = prev
-    else:
-        cur_num = 2
-        primes = []
+    def __iter__(self):
+        return self
 
-    while cur_num <= continue_to or generated < num:
-        sqrt = cur_num ** 0.5
-        is_prime = True
-        for i in primes:
-            if i > sqrt:
-                break
-            if cur_num % i == 0:
-                is_prime = False
-                break
-        if is_prime:
-            primes.append(cur_num)
-            generated += 1
+    def __contains__(self, n):
+        while not self._primes or self._primes[-1] < n:
+            self._generate_next()
+        return n in self._prime_set
 
-        cur_num += 1
+    def __getitem__(self, item):
+        while len(self._primes) <= item:
+            self._generate_next()
+        return self._primes[item]
 
-    return primes
+    def next(self):
+        self._yield_pos += 1
+        return self[self._yield_pos]
+
+    def reset(self, start_at):
+        self._yield_pos = start_at - 1
+
+    def _generate_next(self):
+        while True:
+            sqrt = self._cur_num ** 0.5
+            is_prime = True
+            for i in self._primes:
+                if i > sqrt:
+                    break
+                if self._cur_num % i == 0:
+                    is_prime = False
+                    break
+            if is_prime:
+                self._primes.append(self._cur_num)
+                self._prime_set.add(self._cur_num)
+                self._cur_num += 1
+                return
+            self._cur_num += 1
+
+    def is_prime(self, n):
+        return n in self
+
+    def is_composite(self, n):
+        if n < 2:
+            return False
+        return not n in self
 
 
 def least_common_demon(*integers):

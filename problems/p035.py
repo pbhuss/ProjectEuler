@@ -1,4 +1,4 @@
-from support.factorizer import generate_primes
+from support.factorizer import PrimeGenerator
 
 
 def rotations(x):
@@ -12,22 +12,28 @@ def rotations(x):
 
 def main():
     evens = set(map(str, xrange(0, 10, 2)))
-    primes = generate_primes(continue_to=1000000)
     circular = 1
     passed = set()
     failed = set()
-    for prime in primes[1:]:  # 2, the first prime, is a special case
+    # 2, the first prime, is a special case
+    prime_gen = PrimeGenerator(start_at=1)
+    for prime in prime_gen:
+        if prime >= 1000000:
+            return circular
         if prime in failed or not set(str(prime)).isdisjoint(evens):
             continue
         if prime in passed:
             circular += 1
             continue
-        r = rotations(prime)
-        if r.issubset(primes):
+        rs = rotations(prime)
+        if all(
+            r in prime_gen
+            for r in rs
+        ):
             circular += 1
-            passed.update(r)
+            passed.update(rs)
         else:
-            failed.update(r)
+            failed.update(rs)
     return circular
 
 

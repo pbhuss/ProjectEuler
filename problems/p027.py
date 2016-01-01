@@ -1,9 +1,8 @@
-from support.factorizer import generate_primes
+from support.factorizer import PrimeGenerator
 
 
 def main():
-    primes = generate_primes(100)
-    primes_set = set(primes)
+    prime_gen = PrimeGenerator()
     best_n = -1
     best_a = None
     best_b = None
@@ -12,12 +11,7 @@ def main():
             n = 0
             while True:
                 term = n**2 + a * n + b
-                if term > primes[-1]:
-                    generate_primes(
-                        continue_to=2*term,
-                        prev=primes)
-                    primes_set = set(primes)
-                if term not in primes_set:
+                if term not in prime_gen:
                     if n > best_n:
                         best_a, best_b, best_n = a, b, n
                     break

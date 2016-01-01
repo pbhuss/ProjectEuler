@@ -1,8 +1,10 @@
 from support import factorizer
+from support.factorizer import PrimeGenerator
 
 
 def main():
-    return factorizer.generate_primes(num=10001)[10000]
+    prime_gen = PrimeGenerator()
+    return prime_gen[10000]
 
 
 if __name__ == '__main__':
