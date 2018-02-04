@@ -2,7 +2,7 @@ from support.factorizer import PrimeGenerator
 
 
 def main():
-    prime_gen = PrimeGenerator()
+    prime_gen = PrimeGenerator(contains_fn='_contains_v1')
     best_n = -1
     best_a = None
     best_b = None

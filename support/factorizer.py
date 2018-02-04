@@ -55,9 +55,9 @@ class Factorizer(object):
         return set(self._factors.keys())
 
 
-class PrimeGenerator():
+class PrimeGenerator(object):
 
-    def __init__(self, prev=None, start_at=0):
+    def __init__(self, prev=None, start_at=0, contains_fn='_contains_v2'):
         self.reset(start_at)
         if prev:
             self._cur_num = prev[-1] + 1
@@ -67,14 +67,32 @@ class PrimeGenerator():
             self._cur_num = 2
             self._primes = []
             self._prime_set = set()
+        self._contains_fn = getattr(self, contains_fn)
 
     def __iter__(self):
         return self
 
     def __contains__(self, n):
+        return self._contains_fn(n)
+
+    def _contains_v1(self, n):
         while not self._primes or self._primes[-1] < n:
             self._generate_next()
         return n in self._prime_set
+
+    def _contains_v2(self, n):
+        if n in self._prime_set:
+            return True
+        if self._primes and self._primes[-1] > n:
+            return False
+        while not self._primes or self._primes[-1] ** 2 < n:
+            self._generate_next()
+        for prime in self._primes:
+            if n == prime:
+                return True
+            if n % prime == 0:
+                return False
+        return True
 
     def __getitem__(self, item):
         while len(self._primes) <= item:
