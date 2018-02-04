@@ -40,9 +40,9 @@ class Factorizer(object):
         if self.number is None:
             raise Exception('must first set a number')
         factors = {1}
-        for factor, count in self._factors.iteritems():
+        for factor, count in self._factors.items():
             new = set()
-            for i in xrange(count + 1):
+            for i in range(count + 1):
                 for item in factors:
                     new.add(item * factor**i)
             factors |= new
@@ -81,9 +81,12 @@ class PrimeGenerator():
             self._generate_next()
         return self._primes[item]
 
-    def next(self):
+    def __next__(self):
         self._yield_pos += 1
         return self[self._yield_pos]
+
+    def next(self):
+        return self.__next__()
 
     def reset(self, start_at):
         self._yield_pos = start_at - 1
@@ -122,9 +125,9 @@ def least_common_demon(*integers):
         pfs.append(f.prime_factorization)
     lcd_pf = dict()
     for pf in pfs:
-        for factor, count in pf.iteritems():
+        for factor, count in pf.items():
             lcd_pf[factor] = max(count, lcd_pf.get(factor, 0))
     prod = 1
-    for factor, count in lcd_pf.iteritems():
+    for factor, count in lcd_pf.items():
         prod *= (factor ** count)
     return prod

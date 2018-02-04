@@ -13,11 +13,11 @@ def is_amicable(n, factorizer):
 def main():
     result = 0
     factorizer = Factorizer()
-    for i in xrange(2, 10000):
+    for i in range(2, 10000):
         if is_amicable(i, factorizer):
             result += i
     return result
 
 
 if __name__ == '__main__':
-    print main()
+    print(main())

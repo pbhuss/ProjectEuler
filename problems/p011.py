@@ -1,28 +1,29 @@
+from functools import reduce
 from operator import mul
 
 import numpy as np
 
 
 def greatest_product(grid, n):
-    max = None
+    max_product = -1
     x, y = grid.shape
-    for i in xrange(x):
-        for j in xrange(y):
+    for i in range(x):
+        for j in range(y):
             options = []
             x_pos_in_bounds = i < x - n + 1
             x_neg_in_bounds = i >= n - 1
             y_in_bounds = j < y - n + 1
             if x_pos_in_bounds and y_in_bounds:
-                options.append([grid[i+k, j+k] for k in xrange(n)])
+                options.append([grid[i+k, j+k] for k in range(n)])
             if x_pos_in_bounds:
                 options.append(grid[i:i+n, j])
             if x_neg_in_bounds and y_in_bounds:
-                options.append([grid[i-k, j+k] for k in xrange(n)])
+                options.append([grid[i-k, j+k] for k in range(n)])
             if y_in_bounds:
                 options.append(grid[i, j:j+n])
             products = [reduce(mul, option) for option in options]
-            max = np.max([max] + products)
-    return max
+            max_product = np.max([max_product] + products)
+    return max_product
 
 
 def main():
@@ -56,4 +57,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print main()
+    print(main())

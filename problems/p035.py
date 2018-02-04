@@ -6,12 +6,12 @@ def rotations(x):
     l = len(s)
     return set([
         int(s[l - i:] + s[:l - i])
-        for i in xrange(l)
+        for i in range(l)
     ])
 
 
 def main():
-    evens = set(map(str, xrange(0, 10, 2)))
+    evens = set(map(str, range(0, 10, 2)))
     circular = 1
     passed = set()
     failed = set()
@@ -38,4 +38,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print main()
+    print(main())

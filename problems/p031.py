@@ -5,7 +5,7 @@ def make_change(remaining, coins, pos=0):
             return 1
         return 0
     num_ways = 0
-    for i in xrange(remaining / coin + 1):
+    for i in range(remaining // coin + 1):
         num_ways += make_change(remaining - i * coin, coins, pos + 1)
     return num_ways
 
@@ -16,4 +16,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print main()
+    print(main())

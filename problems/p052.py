@@ -3,7 +3,7 @@ def main():
     while True:
         chars = set(str(i))
         passes = True
-        for x in xrange(2, 7):
+        for x in range(2, 7):
             if set(str(i * x)) != chars:
                 passes = False
                 break
@@ -13,4 +13,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print main()
+    print(main())

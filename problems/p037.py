@@ -4,7 +4,7 @@ from support.factorizer import PrimeGenerator
 def truncations(x):
     s = str(x)
     result = set()
-    for i in xrange(len(s)):
+    for i in range(len(s)):
         result.add(int(s[:i + 1]))
         result.add(int(s[i:]))
     return result
@@ -26,4 +26,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print main()
+    print(main())

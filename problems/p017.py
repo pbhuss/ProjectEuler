@@ -38,11 +38,11 @@ NUM_LENGTH = {
 
 def main():
     result = 0
-    for i in xrange(1, 1001):
+    for i in range(1, 1001):
         num_str = ''
-        thousands = (i % 10000) / 1000
-        hundreds = (i % 1000) / 100
-        tens = (i % 100) / 10
+        thousands = (i % 10000) // 1000
+        hundreds = (i % 1000) // 100
+        tens = (i % 100) // 10
         ones = i % 10
         if thousands > 0:
             num_str += NUM_LENGTH[1][thousands]
@@ -64,4 +64,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print main()
+    print(main())

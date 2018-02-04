@@ -17,7 +17,7 @@ def main():
     max_len = 0
     max_i = 0
     cache = {1: 1}
-    for i in xrange(1, 1000000):
+    for i in range(1, 1000000):
         cur_len = collatz_sequence_len(i, cache)
         if cur_len > max_len:
             max_len = cur_len
@@ -26,4 +26,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print main()
+    print(main())

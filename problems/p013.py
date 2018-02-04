@@ -1,3 +1,4 @@
+from functools import reduce
 from operator import add
 
 
@@ -122,4 +123,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print main()
+    print(main())

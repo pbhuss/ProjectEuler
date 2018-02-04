@@ -38,7 +38,10 @@ nosetests.xml
 .idea
 
 # pytest
-*.cache
+.pytest_cache/
 
 # don't check in answers file
 data/answers.yaml
+
+# Virtualenv
+venv/

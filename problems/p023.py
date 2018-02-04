@@ -28,8 +28,8 @@ def main():
                 break
             abundant_sums.add(abundant_sum)
 
-    return sum(set(xrange(1, STOP_AT)) - abundant_sums)
+    return sum(set(range(1, STOP_AT)) - abundant_sums)
 
 
 if __name__ == '__main__':
-    print main()
+    print(main())
