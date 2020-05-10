@@ -9,7 +9,7 @@ def load_solution_modules():
     module_map = dict()
     prefix = problems.__name__ + '.'
     for _, modname, _ in pkgutil.iter_modules(problems.__path__, prefix):
-        problem_number = int(re.search('\d+', modname).group())
+        problem_number = int(re.search(r'\d+', modname).group())
         module_map[problem_number] = __import__(modname, fromlist=['foo'])
     return module_map
 

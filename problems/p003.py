@@ -1,4 +1,4 @@
-from support import factorizer
+from util import factorizer
 
 
 def main():

@@ -4,17 +4,20 @@ def triangle_gen():
         yield n * (n + 1) // 2
         n += 1
 
+
 def pentagonal_gen():
     n = 1
     while True:
         yield n * (3 * n - 1) // 2
         n += 1
 
+
 def hexagonal_gen():
     n = 1
     while True:
         yield n * (2 * n - 1)
         n += 1
+
 
 def main():
     generators = [triangle_gen(), pentagonal_gen(), hexagonal_gen()]

@@ -1,12 +1,12 @@
-from support.factorizer import PrimeGenerator
+from util.factorizer import PrimeGenerator
 
 
 def rotations(x):
     s = str(x)
-    l = len(s)
+    len_ = len(s)
     return set([
-        int(s[l - i:] + s[:l - i])
-        for i in range(l)
+        int(s[len_ - i:] + s[:len_ - i])
+        for i in range(len_)
     ])
 
 

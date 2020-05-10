@@ -1,4 +1,4 @@
-from support.pathfinding import max_triangle_path
+from util.pathfinding import max_triangle_path
 
 
 def main():

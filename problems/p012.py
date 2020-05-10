@@ -1,4 +1,4 @@
-from support.factorizer import Factorizer
+from util.factorizer import Factorizer
 
 
 def triangle_numbers():

@@ -1,4 +1,4 @@
-from support.factorizer import PrimeGenerator
+from util.factorizer import PrimeGenerator
 
 
 def truncations(x):
@@ -14,7 +14,7 @@ def main():
     truncatable_primes = []
     prime_gen = PrimeGenerator()
     while len(truncatable_primes) != 11:
-        prime = prime_gen.next()
+        prime = next(prime_gen)
         if prime < 10:
             continue
         if all(

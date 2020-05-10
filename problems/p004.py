@@ -1,4 +1,4 @@
-from support import palindromes
+from util import palindromes
 
 
 def main():

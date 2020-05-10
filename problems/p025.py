@@ -1,12 +1,4 @@
-def fibonacci_generator():
-    a = 1
-    b = 0
-
-    while True:
-        yield a
-        b += a
-        yield b
-        a += b
+from util.generators import fibonacci_generator
 
 
 def main():

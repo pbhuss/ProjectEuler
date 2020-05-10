@@ -1,4 +1,4 @@
-from scipy.misc import comb
+from scipy.special import comb
 
 
 def main():

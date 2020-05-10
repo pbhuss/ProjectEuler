@@ -6,7 +6,7 @@ ANSWERS_PATH = 'data/answers.yaml'
 
 def load_answers():
     with open(ANSWERS_PATH) as fp:
-        return yaml.load(fp)
+        return yaml.safe_load(fp)
 
 
 answers = load_answers()

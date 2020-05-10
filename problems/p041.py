@@ -1,6 +1,6 @@
 from itertools import permutations
 
-from support.factorizer import PrimeGenerator
+from util.factorizer import PrimeGenerator
 
 
 def main():
@@ -11,7 +11,8 @@ def main():
         for n in range(9, 0, -1)
     )
 
-    # If sum of digits in number is 3, the number is divisible by 3 and thus not prime
+    # If sum of digits in number is 3, the number is divisible by 3
+    # and thus not prime
     digit_sets = filter(
         lambda digit_set: sum(map(int, digit_set)) % 3 != 0,
         digit_sets

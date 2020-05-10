@@ -1,5 +1,4 @@
-from support import factorizer
-from support.factorizer import PrimeGenerator
+from util.factorizer import PrimeGenerator
 
 
 def main():

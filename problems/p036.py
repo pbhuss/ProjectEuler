@@ -1,4 +1,4 @@
-from support.palindromes import is_palindrome
+from util.palindromes import is_palindrome
 
 
 def main():

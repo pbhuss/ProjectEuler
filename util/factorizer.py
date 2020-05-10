@@ -1,5 +1,7 @@
 from math import ceil
 
+from util.generators import MemoizedGenerator
+
 
 class Factorizer(object):
 
@@ -55,22 +57,13 @@ class Factorizer(object):
         return set(self._factors.keys())
 
 
-class PrimeGenerator(object):
+class PrimeGenerator(MemoizedGenerator):
 
-    def __init__(self, prev=None, start_at=0, contains_fn='_contains_v2'):
-        self.reset(start_at)
-        if prev:
-            self._cur_num = prev[-1] + 1
-            self._primes = prev
-            self._prime_set = set(prev)
-        else:
-            self._cur_num = 2
-            self._primes = []
-            self._prime_set = set()
+    def __init__(self, start_at=0, contains_fn='_contains_v2'):
+        super().__init__(self._prime_generator(), start_at=start_at)
+        self._primes = self._mem
+        self._prime_set = set()
         self._contains_fn = getattr(self, contains_fn)
-
-    def __iter__(self):
-        return self
 
     def __contains__(self, n):
         return self._contains_fn(n)
@@ -92,39 +85,25 @@ class PrimeGenerator(object):
                 return True
             if n % prime == 0:
                 return False
+            if n < prime ** 2:
+                return True
         return True
 
-    def __getitem__(self, item):
-        while len(self._primes) <= item:
-            self._generate_next()
-        return self._primes[item]
-
-    def __next__(self):
-        self._yield_pos += 1
-        return self[self._yield_pos]
-
-    def next(self):
-        return self.__next__()
-
-    def reset(self, start_at):
-        self._yield_pos = start_at - 1
-
-    def _generate_next(self):
+    def _prime_generator(self):
+        cur_num = 2
         while True:
-            sqrt = self._cur_num ** 0.5
+            sqrt = cur_num ** 0.5
             is_prime = True
             for i in self._primes:
                 if i > sqrt:
                     break
-                if self._cur_num % i == 0:
+                if cur_num % i == 0:
                     is_prime = False
                     break
             if is_prime:
-                self._primes.append(self._cur_num)
-                self._prime_set.add(self._cur_num)
-                self._cur_num += 1
-                return
-            self._cur_num += 1
+                self._prime_set.add(cur_num)
+                yield cur_num
+            cur_num += 1
 
     def is_prime(self, n):
         return n in self
@@ -132,7 +111,7 @@ class PrimeGenerator(object):
     def is_composite(self, n):
         if n < 2:
             return False
-        return not n in self
+        return n not in self
 
 
 def least_common_demon(*integers):

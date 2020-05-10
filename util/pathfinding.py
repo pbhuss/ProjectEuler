@@ -2,8 +2,7 @@ import functools
 
 
 def triangle_path(agg, triangle):
-    path = []
-    path.append([triangle[0][0]])
+    path = [[triangle[0][0]]]
     for i, row in enumerate(triangle[1:], start=1):
         path_row = []
         for j, node in enumerate(row):
